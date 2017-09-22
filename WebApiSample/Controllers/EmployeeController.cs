@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using EmployeeDataAccess;
@@ -12,14 +13,16 @@ namespace WebApiSample.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class EmployeeController : ApiController
     {
+        [BasicAuthentication]
         public HttpResponseMessage Get(string gender="all")
         {
+            string username = Thread.CurrentPrincipal.Identity.Name;
             using (PracticeEntities entities = new PracticeEntities())
             {
-                switch (gender.ToLower())
+                switch (/*gender.ToLower()*/username.ToLower())
                 {
-                    case "all":
-                        return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
+                    //case "all":
+                    //    return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.ToList());
                     case "male":
                         return Request.CreateResponse(HttpStatusCode.OK, entities.Employees.Where(emp=>emp.gender == "male").ToList());
                     case "female":

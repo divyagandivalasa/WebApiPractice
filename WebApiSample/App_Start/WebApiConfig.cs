@@ -44,7 +44,7 @@ namespace WebApiSample
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.Filters.Add(new RequireHttpsAttribute());
+            //config.Filters.Add(new RequireHttpsAttribute());
             //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors(cors);
             //var jsonpFormatter =  new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
